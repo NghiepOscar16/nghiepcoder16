@@ -1,0 +1,633 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,600&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --pink: #ff74a4;
+    --violet: #9f6ea3;
+    --lightback: #515c6f;
+    --white: #fff;
+    --darkwhite: #cecaca;
+    --pinkshadow: #ffcbdd;
+    --lightbshadow: rgba(0, 0, 0, 0.15);
+}
+
+html {
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border-radius: 0px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+body {
+    overflow: hidden;
+    background-image: url("https://img.upanh.tv/2023/01/05/banner.jpg");
+    background-size: cover;
+    position: fixed;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.wrapper {
+    width: 380px;
+    padding: 25px 30px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 15px;
+    background: #1f1f27;
+    box-shadow: 0px 6px 15px var(--lightbshadow);
+}
+
+.wrapper i {
+    cursor: pointer;
+}
+
+.top-bar,
+.progress-bar .song-timer,
+.controls,
+.music-list .header,
+.music-list ul li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top-bar i {
+    font-size: 30px;
+    color: var(--lightback);
+}
+
+.top-bar i:first-child {
+    margin-left: -7px;
+}
+
+.top-bar span {
+    font-size: 18px;
+    margin-left: -3px;
+    color: var(--white);
+}
+
+.img-area {
+    width: 100%;
+    height: 256px;
+    overflow: hidden;
+    margin-top: 25px;
+    border-radius: 15px;
+    box-shadow: 0px 6px 12px var(--lightbshadow);
+}
+
+.img-area img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.song-details {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.song-details p {
+    color: var(--white);
+}
+
+.song-details .name {
+    font-size: 21px;
+}
+
+.song-details .artist {
+    font-size: 18px;
+    opacity: 0.9;
+    line-height: 35px;
+}
+
+.progress-area {
+    height: 6px;
+    width: 100%;
+    border-radius: 50px;
+    background: #f0f0f0;
+    cursor: pointer;
+}
+
+.progress-area .progress-bar {
+    height: inherit;
+    width: 0%;
+    position: relative;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--pink) 0%, var(--violet) 100%);
+}
+
+.progress-bar::before {
+    content: "";
+    position: absolute;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    top: 50%;
+    right: -5px;
+    z-index: 2;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%);
+    background: inherit;
+    transition: opacity 0.2s ease;
+}
+
+.progress-area:hover .progress-bar::before {
+    opacity: 1;
+    pointer-events: none;
+}
+
+.progress-area .song-timer {
+    margin-top: 2px;
+}
+
+.song-timer span {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--lightback);
+}
+
+.controls {
+    margin: 40px 0 5px 0;
+}
+
+.controls i {
+    font-size: 28px;
+    user-select: none;
+    background: linear-gradient(var(--pink) 0%, var(--violet) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.controls i:nth-child(2),
+.controls i:nth-child(4) {
+    font-size: 43px;
+}
+
+.controls #next {
+    margin-left: -13px;
+}
+
+.controls .play-pause {
+    height: 54px;
+    width: 54px;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(var(--white) 0%, var(--darkwhite) 100%);
+    box-shadow: 0px 0px 5px var(--pink);
+}
+
+.play-pause::before {
+    position: absolute;
+    content: "";
+    height: 43px;
+    width: 43px;
+    border-radius: inherit;
+    background: linear-gradient(var(--pink) 0%, var(--violet) 100%);
+}
+
+.play-pause i {
+    height: 43px;
+    width: 43px;
+    line-height: 43px;
+    text-align: center;
+    background: inherit;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: absolute;
+}
+
+.music-list {
+    position: absolute;
+    background: var(--white);
+    width: 100%;
+    left: 0;
+    bottom: -55%;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 5;
+    padding: 15px 30px;
+    border-radius: 15px;
+    box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.15s ease-out;
+}
+
+
+/* Này mình CSS sẵn henn, do lát có thêm Js thì các bạn mới thấy rõ đc phần này :D 
+Này là cái nút mà bấm vô sẽ hiện list nhạc í  */
+
+.music-list.show {
+    bottom: 0;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.header .row {
+    display: flex;
+    align-items: center;
+    font-size: 19px;
+    color: var(--lightback);
+}
+
+.header .row i {
+    cursor: default;
+}
+
+.header .row span {
+    margin-left: 5px;
+}
+
+.header #close {
+    font-size: 22px;
+    color: var(--lightback);
+}
+
+.music-list ul {
+    margin: 10px 0;
+    max-height: 260px;
+    overflow: auto;
+}
+
+
+/* Do mình làm quen rùi nên nãy giờ mình CSS ước chừng thui chứ khum chính xác đâu nhe :D lát có j cần căn chỉnh thì lát mình quay lại đây he :3 */
+
+.music-list ul::-webkit-scrollbar {
+    width: 0px;
+}
+
+.music-list ul li {
+    list-style: none;
+    display: flex;
+    cursor: pointer;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+    color: var(--lightback);
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.music-list ul li:last-child {
+    border-bottom: 0px;
+}
+
+.music-list ul li .row span {
+    font-size: 17px;
+}
+
+.music-list ul li .row p {
+    opacity: 0.9;
+}
+
+ul li .audio-duration {
+    font-size: 16px;
+}
+
+ul li.playing {
+    pointer-events: none;
+    color: var(--violet);
+}
+
+html {
+    position: relative
+}
+
+html:after {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background-image: url('https://cdn.glitch.me/2a4d780f-b9e8-4739-9886-831c1d5fcdb0%2F26a4f5a3-8dcd-4eed-afcb-72f99c6aa653.image.png?v=1639136324336'), url('https://cdn.glitch.me/2a4d780f-b9e8-4739-9886-831c1d5fcdb0%2F7f115bbb-5f47-4e19-98b7-dbf4a359a00c.image.png?v=1639136365819'), url('https://cdn.glitch.me/2a4d780f-b9e8-4739-9886-831c1d5fcdb0%2F5a01e66e-33a3-4aad-96f5-87d8336d3fa4.image.png?v=1639136393414');
+    animation: snow 10s linear infinite
+}
+
+@keyframes snow {
+    0% {
+        background-position: 0px 0px, 0px 0px, 0px 0px
+    }
+    50% {
+        background-position: 500px 500px, 100px 200px, -100px 150px
+    }
+    100% {
+        background-position: 500px 1000px, 200px 400px, -100px 300px
+    }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border-radius: 0px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+.Border {
+    font-size: 12px;
+    position: relative;
+    min-height: 100%;
+    box-sizing: border-box;
+    padding-bottom: 120px;
+    background-color: #222;
+    text-align: center;
+    background-color: BLACK;
+    padding: 0px;
+    margin: 8px;
+    border-style: double;
+    border-radius: 120px;
+    border-color: #ccc;
+    border-width: 2px;
+    animation-name: bodyborder;
+    animation-iteration-count: infinite;
+    animation-duration: 5s;
+    animation-direction: right
+}
+
+.BlurWebs {
+    animation: blur 3s linear 1 0s forwards
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 15px
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px
+}
+
+::-webkit-scrollbar-thumb {
+    background: #00ffbc;
+    border-radius: 10px
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #00ffbc
+}
+
+.rainbow {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 16px;
+    color: #aaa;
+    margin-bottom: 0;
+    animation: colorRotate 2.5s linear 0s infinite
+}
+
+@keyframes colorRotate {
+    from {
+        color: #FFFFFF
+    }
+    10% {
+        color: #FF0000
+    }
+    30% {
+        color: #00FF00
+    }
+    45% {
+        color: #0000FF
+    }
+    55% {
+        color: #FFFF00
+    }
+    65% {
+        color: #00FFFF
+    }
+    75% {
+        color: #00FF00
+    }
+    85% {
+        color: #0000FF
+    }
+    100% {
+        color: #FF66CC
+    }
+}
+
+.Topnav {
+    overflow: hidden
+}
+
+.Topnav a {
+    font-family: 'ZCOOL QingKe HuangYou';
+    float: left;
+    display: block;
+    color: pink;
+    text-align: center;
+    padding: 12px 14px;
+    text-decoration: none;
+    font-size: 17px;
+    border-bottom: 3px solid transparent
+}
+
+.Topnav a:hover {
+    border-bottom: 3px solid #00ffff;
+    margin-left: 2px;
+    transition: 0.5s
+}
+
+.Topnav a.Active {
+    border-bottom: 3px solid #00ff00;
+    margin-left: 5px
+}
+
+#Toast {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: gold;
+    text-align: center;
+    border-radius: 50px;
+    border: 3px solid green;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 35px;
+    font-size: 20px
+}
+
+#Toast.show {
+    visibility: visible;
+    -webkit-animation: fadein 2.0s, fadeout .2.0s 2.0s;
+    animation: fadein 2.0s, fadeout 2.0s 2.0s
+}
+
+.NoScript {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    margin: 20px;
+    flex-direction: column;
+    border-radius: 20px;
+    border: 3px double cyan;
+    background-color: #252525;
+    color: #fff
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.99)
+    }
+    50% {
+        transform: scale(1.1)
+    }
+    100% {
+        transform: scale(0.99)
+    }
+}
+
+@keyframes bodyborder {
+    20% {
+        border-color: cyan
+    }
+    40% {
+        border-color: lime
+    }
+    60% {
+        border-color: red
+    }
+    80% {
+        border-color: yellow
+    }
+    90% {
+        border-color: orange
+    }
+}
+
+@keyframes shimmer {
+    100% {
+        -webkit-mask-position: left
+    }
+}
+
+@-webkit-keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0
+    }
+    to {
+        bottom: 35px;
+        opacity: 1
+    }
+}
+
+@keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0
+    }
+    to {
+        bottom: 35px;
+        opacity: 1
+    }
+}
+
+@-webkit-keyframes fadeout {
+    from {
+        bottom: 35px;
+        opacity: 1
+    }
+    to {
+        bottom: 0;
+        opacity: 0
+    }
+}
+
+@keyframes fadeout {
+    from {
+        bottom: 35px;
+        opacity: 1
+    }
+    to {
+        bottom: 0;
+        opacity: 0
+    }
+}
+
+@keyframes blur {
+    from {
+        opacity: 0;
+        filter: blur(3px)
+    }
+    to {
+        opacity: 1;
+        filter: blur(0px)
+    }
+}
+
+@keyframes snow {
+    0% {
+        background-position: 0px 0px, 0px 0px, 0px 0px
+    }
+    50% {
+        background-position: 500px 500px, 100px 200px, -100px 150px
+    }
+    100% {
+        background-position: 500px 1000px, 200px 400px, -100px 300px
+    }
+}
+
+.Cuoi {
+    padding: 40px 0;
+    color: #ffffff
+}
+
+.Footer .XuanNghiepFtCopyright {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 20px;
+    color: #aaa;
+    margin-bottom: 0
+}
+
+.rainbow {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 16px;
+    color: #aaa;
+    margin-bottom: 0;
+    animation: colorRotate 2.5s linear 0s infinite
+}
